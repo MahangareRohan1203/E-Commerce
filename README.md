@@ -47,17 +47,7 @@ To get started, follow these steps:
 3. Build and run the application.
 
 ## API Endpoints
-
-### User Module
-
-<!-- - `POST /users`: Register a new user.
-- `POST /users/saveCabBooking`: Book a cab.
-- `GET /users/{email}`: Retrieve user details by email.
-- `GET /users`: Retrieve a list of all users.
-- `PATCH /users/{email}`: Update user details by email.
-- `DELETE /users/{email}`: Delete a user by email.
-- `GET /users/role/{role}`: Retrieve users by role.
-- `GET /users/hello`: Test endpoint for Spring Security. -->
+API Dcoumentation `https://documenter.getpostman.com/view/24854607/2s9YR9YCt7`
 
 ## Database Configuration
 
