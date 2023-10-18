@@ -13,12 +13,11 @@ import java.util.Set;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String description;
@@ -55,4 +54,8 @@ public class Product {
     private Category category;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public Product() {
+        this.setDiscountedPercent(-1);
+    }
 }
