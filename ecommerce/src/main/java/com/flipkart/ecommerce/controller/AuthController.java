@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,12 +57,13 @@ public class AuthController {
         createdUser.setPassword(password);
         createdUser.setFirstName(firstName);
         createdUser.setLastName(lastName);
+        createdUser.setRole("USER");
         User savedUser = userRepository.save(createdUser);
         cartService.createCart(savedUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtProvider.generateToken(authentication);
-        return new ResponseEntity<>(new AuthResponse(token, "Signup Success"), HttpStatus.CREATED);
+//        String token = jwtProvider.generateToken(authentication);
+        return new ResponseEntity<>(new AuthResponse("Sign In To get JWT", "Signup Success"), HttpStatus.CREATED);
     }
 
     @PostMapping("/signin")
@@ -69,8 +71,10 @@ public class AuthController {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         Authentication authentication = authenticate(email, password);
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtProvider.generateToken(authentication);
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User Not found"));
+        String token = jwtProvider.generateToken(authentication, user.getRole());
 
         return new ResponseEntity<>(new AuthResponse(token, "Signin Successful"), HttpStatus.ACCEPTED);
     }

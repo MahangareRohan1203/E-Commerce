@@ -89,6 +89,16 @@ public class ProductServiceImplementation implements ProductService {
         if (product.getTitle() != null) {
             existingProduct.setTitle(product.getTitle());
         }
+        if(product.getDescription() != null) existingProduct.setDescription(product.getDescription());
+        if(product.getColor() != null) existingProduct.setColor(product.getColor());
+        if(product.getBrand() != null) existingProduct.setBrand(product.getBrand());
+        if(product.getPrice() != 0) existingProduct.setPrice(product.getPrice());
+        if(product.getQuantity() != 0) existingProduct.setQuantity(product.getQuantity());
+        if(product.getDiscountedPrice() != 0) existingProduct.setDiscountedPrice(product.getDiscountedPrice());
+        if(product.getDiscountedPercent() >= 0) existingProduct.setDiscountedPercent(product.getDiscountedPercent());
+        if(product.getSizes() != null) existingProduct.setSizes(product.getSizes());
+        if(product.getImageUrl() != null) existingProduct.setImageUrl(product.getImageUrl());
+
         productRepository.save(existingProduct);
         return existingProduct;
     }
@@ -127,5 +137,10 @@ public class ProductServiceImplementation implements ProductService {
         products = products.subList(startIndex, endIndex);
         Page<Product> filteredProduct = new PageImpl<>(products, pageable, products.size());
         return filteredProduct;
+    }
+
+    @Override
+    public List<Product> findAllProducts() {
+        return productRepository.findAll();
     }
 }

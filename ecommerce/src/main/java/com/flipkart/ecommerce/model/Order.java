@@ -1,7 +1,6 @@
 package com.flipkart.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "order_id")
@@ -36,6 +35,7 @@ public class Order {
     private LocalDateTime deliveryDate;
     @OneToOne
     private Address shippingAddress;
+
     @Embedded
     private PaymentDetails paymentDetails = new PaymentDetails();
 

@@ -7,7 +7,6 @@ import com.flipkart.ecommerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,7 @@ public class OrderServiceImplementation implements OrderService {
         userRepository.save(user);
 
         Cart cart = cartService.findUserCart(user.getId());
+        if (cart.getCartItems().isEmpty()) throw new CartException("Cart is Empty");
         List<OrderItem> orderItems = new ArrayList<>();
 
         for (CartItem item : cart.getCartItems()) {
