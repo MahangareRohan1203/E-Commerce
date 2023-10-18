@@ -47,7 +47,7 @@ To get started, follow these steps:
 3. Build and run the application.
 
 ## API Endpoints
-API Dcoumentation `https://documenter.getpostman.com/view/24854607/2s9YR9YCt7`
+API Documentation `https://documenter.getpostman.com/view/24854607/2s9YR9YCt7`
 
 ## Database Configuration
 
