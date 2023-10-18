@@ -77,9 +77,8 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
 
-## Testing
-- mvn test
-
+<!-- ## Testing
+- mvn test -->
 ## Contributors
 - Rohan Mahangare
 
