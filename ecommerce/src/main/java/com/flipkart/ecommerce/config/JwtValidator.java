@@ -28,16 +28,16 @@ public class JwtValidator extends OncePerRequestFilter {
     protected void doFilterInternal
             (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
-        System.out.println("JWT "+jwt);
+//        System.out.println("JWT "+jwt);
         if (jwt != null) {
             jwt = jwt.substring(7);
             try {
                 SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-                System.out.println("KEY "+key);
+//                System.out.println("KEY "+key);
                 Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(jwt).getPayload();
-                System.out.println("CLAMIS "+claims);
+//                System.out.println("CLAMIS "+claims);
                 String email = String.valueOf(claims.get("email"));
-                System.out.println("EMAIL IS "+email);
+//                System.out.println("EMAIL IS "+email);
                 String authorities = String.valueOf(claims.get("authorities"));
                 List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
