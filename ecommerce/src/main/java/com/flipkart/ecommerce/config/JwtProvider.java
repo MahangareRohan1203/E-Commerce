@@ -15,7 +15,11 @@ public class JwtProvider {
     SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
     public String generateToken(Authentication authentication, String role) {
-        String jwt = Jwts.builder().setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime() + 846000000)).claim("email", authentication.getName()).claim("authorities",role).signWith(key).compact();
+        String jwt = Jwts.builder().setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + 846000000))
+                .claim("email", authentication.getName())
+                .claim("authorities",role)
+                .signWith(key).compact();
         return jwt;
     }
 
